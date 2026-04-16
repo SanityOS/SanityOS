@@ -1,0 +1,229 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* SanityOS — slate dark workspace with blue primary, amber accent */
+  --background: oklch(0.16 0.02 260);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.22 0.02 260);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.22 0.02 260);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.62 0.19 255);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.28 0.02 260);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.28 0.02 260);
+  --muted-foreground: oklch(0.72 0.01 260);
+  --accent: oklch(0.75 0.17 55);
+  --accent-foreground: oklch(0.2 0.02 260);
+  --destructive: oklch(0.637 0.237 25.331);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.32 0.02 260);
+  --input: oklch(0.28 0.02 260);
+  --ring: oklch(0.62 0.19 255);
+  --radius: 0.75rem;
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.45s ease-out both;
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50%      { opacity: 0.6;  transform: scale(1.08); }
+  }
+  .animate-pulse-soft {
+    animation: pulse-soft 4s ease-in-out infinite;
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25%      { transform: rotate(-8deg); }
+    75%      { transform: rotate(8deg); }
+  }
+  .animate-wiggle {
+    animation: wiggle 2.4s ease-in-out infinite;
+    transform-origin: 50% 60%;
+  }
+
+  @keyframes shimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(400%); }
+  }
+  .animate-shimmer {
+    animation: shimmer 1.2s linear infinite;
+  }
+
+  /* Corner flame flicker — gentle scale + opacity wobble, not jarring. */
+  @keyframes flame-flicker {
+    0%, 100% { transform: scale(1);    opacity: 1; }
+    20%      { transform: scale(1.08); opacity: 0.85; }
+    45%      { transform: scale(0.94); opacity: 1; }
+    70%      { transform: scale(1.05); opacity: 0.9; }
+  }
+  .animate-flame-flicker {
+    animation: flame-flicker 5.5s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  /* Soft glow ring — used around the app title / brand mark. */
+  @keyframes brand-glow {
+    0%, 100% { box-shadow: 0 0 0 0 oklch(0.62 0.19 255 / 0.55),
+                           0 0 18px 2px oklch(0.62 0.19 255 / 0.35); }
+    50%      { box-shadow: 0 0 0 2px oklch(0.62 0.19 255 / 0.4),
+                           0 0 28px 4px oklch(0.75 0.17 55 / 0.45); }
+  }
+  .animate-brand-glow {
+    animation: brand-glow 3.6s ease-in-out infinite;
+  }
+
+  /* Glassmorphism 2.0 — "Frosted Depth" card treatment. */
+  .frosted {
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background-color: oklch(0.22 0.02 260 / 0.55);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.04),
+      0 12px 40px -12px oklch(0 0 0 / 0.45);
+  }
+
+  /* Elastic hover — gentle scale + lift with cubic-bezier bounce. */
+  .hover-elastic {
+    transition:
+      transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.35s ease,
+      border-color 0.3s ease,
+      color 0.3s ease,
+      background-color 0.3s ease;
+  }
+  .hover-elastic:hover {
+    transform: translateY(-2px) scale(1.03);
+  }
+  .hover-elastic:active {
+    transform: translateY(0) scale(0.98);
+    transition-duration: 0.12s;
+  }
+
+  /* Staggered entry for lists / grids. Children animate in one by one. */
+  @keyframes stagger-rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .stagger-in > * {
+    animation: stagger-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .stagger-in > *:nth-child(1)  { animation-delay: 0ms;  }
+  .stagger-in > *:nth-child(2)  { animation-delay: 60ms; }
+  .stagger-in > *:nth-child(3)  { animation-delay: 120ms; }
+  .stagger-in > *:nth-child(4)  { animation-delay: 180ms; }
+  .stagger-in > *:nth-child(5)  { animation-delay: 240ms; }
+  .stagger-in > *:nth-child(6)  { animation-delay: 300ms; }
+  .stagger-in > *:nth-child(7)  { animation-delay: 360ms; }
+  .stagger-in > *:nth-child(8)  { animation-delay: 420ms; }
+
+  /* Adaptive bloom — a pulsing diffuse glow attached via data-glow. */
+  @keyframes bloom-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 oklch(0.62 0.19 255 / 0.0),
+                           0 0 22px 2px oklch(0.62 0.19 255 / 0.25); }
+    50%      { box-shadow: 0 0 0 1px oklch(0.62 0.19 255 / 0.35),
+                           0 0 32px 6px oklch(0.75 0.17 55 / 0.3); }
+  }
+  [data-glow="true"] {
+    animation: bloom-pulse 3.2s ease-in-out infinite;
+  }
+
+  /* Prefer calmer motion when users request reduced motion. */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-flame-flicker,
+    .animate-brand-glow,
+    .animate-pulse-soft,
+    .animate-wiggle,
+    .animate-shimmer,
+    .stagger-in > *,
+    [data-glow="true"] {
+      animation: none !important;
+    }
+    .hover-elastic {
+      transition: none !important;
+    }
+    .hover-elastic:hover {
+      transform: none !important;
+    }
+  }
+
+  @keyframes ultra-hue {
+    0%   { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
+
+  .ultra-mode {
+    position: relative;
+    animation: ultra-hue 8s linear infinite;
+  }
+
+  .ultra-mode::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(
+      135deg,
+      oklch(0.55 0.22 25 / 0.35),
+      oklch(0.7 0.2 70 / 0.25) 50%,
+      oklch(0.55 0.22 25 / 0.35)
+    );
+    mix-blend-mode: screen;
+  }
+
+  .ultra-mode > * {
+    position: relative;
+    z-index: 1;
+  }
+}
