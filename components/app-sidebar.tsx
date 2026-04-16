@@ -1,11 +1,28 @@
 "use client"
 
-import { Home, Sparkles, Music, Flame, Zap, Plug, Github, Star } from "lucide-react"
+import {
+  Home,
+  Sparkles,
+  Music,
+  Flame,
+  Zap,
+  Plug,
+  Github,
+  Star,
+  ShieldCheck,
+  MessageSquare,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 
-export type View = "home" | "ai" | "router" | "music"
+export type View =
+  | "home"
+  | "ai"
+  | "router"
+  | "music"
+  | "account"
+  | "feedback"
 
 // Update this to your real repo URL any time. Single source of truth.
 export const GITHUB_URL = "https://github.com/sanityos/sanityos"
@@ -15,6 +32,8 @@ const NAV: { id: View; label: string; icon: typeof Home; hint: string }[] = [
   { id: "ai", label: "AI Builder", icon: Sparkles, hint: "Generate" },
   { id: "router", label: "AI Router", icon: Plug, hint: "Roblox" },
   { id: "music", label: "Music", icon: Music, hint: "Listen" },
+  { id: "account", label: "Account", icon: ShieldCheck, hint: "Security" },
+  { id: "feedback", label: "Feedback", icon: MessageSquare, hint: "Rate us" },
 ]
 
 interface AppSidebarProps {

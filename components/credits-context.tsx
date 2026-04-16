@@ -13,6 +13,11 @@ export const REDEEM_CODES: RedeemCode[] = [
   { code: "Release2026", credits: 50, label: "Launch bonus" },
   { code: "SanityFan", credits: 25, label: "Community" },
   { code: "BuilderBoost", credits: 30, label: "Creators" },
+  { code: "Beta02", credits: 75, label: "0.2 Beta drop" },
+  { code: "FlameOn", credits: 40, label: "Ultra promo" },
+  { code: "RobloxDev", credits: 60, label: "Studio plugin" },
+  { code: "NightOwl", credits: 20, label: "Late-night build" },
+  { code: "SecureMe", credits: 35, label: "Safety first" },
 ]
 
 const STORAGE_KEY = "sanityos:credits:v1"

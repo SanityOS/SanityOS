@@ -15,6 +15,8 @@ import { HomePanel } from "@/components/home-panel"
 import { AIBuilder } from "@/components/ai-builder"
 import { AIRouter } from "@/components/ai-router"
 import { MusicPlayer } from "@/components/music-player"
+import { AccountSecurity } from "@/components/account-security"
+import { FeedbackPanel } from "@/components/feedback-panel"
 import { AppSidebar, type View } from "@/components/app-sidebar"
 import { MusicProvider } from "@/components/music-context"
 import { CreditsProvider } from "@/components/credits-context"
@@ -102,6 +104,8 @@ export default function Page() {
                   {view === "ai" && <AIBuilder />}
                   {view === "router" && <AIRouter />}
                   {view === "music" && <MusicPlayer />}
+                  {view === "account" && <AccountSecurity />}
+                  {view === "feedback" && <FeedbackPanel />}
                 </div>
               </div>
             </main>
